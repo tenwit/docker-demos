@@ -1,0 +1,20 @@
+task build(type: Exec) {
+    commandLine 'docker', 'build', '-t', 'iqa/parabank:latest', '.'
+}
+
+task run(type: Exec) {
+    ignoreExitValue true
+    dependsOn 'build', 'cleanContainer'
+    commandLine 'docker', 'run', '-itd', '--name', 'base_parabank', 'iqa/parabank:latest'
+}
+
+task cleanContainer(type: Exec) {
+    ignoreExitValue true
+    commandLine 'docker', 'rm', '-f', 'base_parabank'
+}
+
+task cleanImage(type: Exec) {
+    ignoreExitValue true
+    dependsOn 'cleanContainer'
+    commandLine 'docker', 'image', 'rm', '-f', 'iqa/parabank:latest'
+}
