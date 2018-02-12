@@ -1,11 +1,24 @@
 task build(type: Exec) {
-    commandLine 'docker', 'build', '-t', 'iqa/parabank:latest', '.'
+    commandLine 'docker', 'build', '-t', 'iqa/parabank:latest', '-t', 'registry.gitlab.com/integrationqa/iqa/demos/docker/parabank:latest', '.'
+}
+
+task assemble { // Alias for "build", to follow the gradle convention.
+    dependsOn build
 }
 
 task run(type: Exec) {
     ignoreExitValue true
     dependsOn 'build', 'cleanContainer'
     commandLine 'docker', 'run', '-itd', '--name', 'base_parabank', 'iqa/parabank:latest'
+}
+
+task stop(type: Exec) {
+    ignoreExitValue true
+    commandLine 'docker', 'stop', 'base_parabank'
+}
+
+task deploy(type: Exec) {
+    commandLine 'docker', 'push', 'registry.gitlab.com/integrationqa/iqa/demos/docker/parabank:latest'
 }
 
 task cleanContainer(type: Exec) {
@@ -16,5 +29,9 @@ task cleanContainer(type: Exec) {
 task cleanImage(type: Exec) {
     ignoreExitValue true
     dependsOn 'cleanContainer'
-    commandLine 'docker', 'image', 'rm', '-f', 'iqa/parabank:latest'
+    commandLine 'docker', 'image', 'rm', '-f', 'iqa/parabank:latest', 'registry.gitlab.com/integrationqa/iqa/demos/docker/parabank:latest'
+}
+
+task check {
+    dependsOn 'run', 'stop'
 }
