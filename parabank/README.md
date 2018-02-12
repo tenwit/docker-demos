@@ -6,8 +6,9 @@ Used by several other images in the Docker demos projects.
 The usual docker commands are used. For your convenience, there's a build.gradle provided
 that gives these commands:
 
-* `./gradlew build` Create the parabank image _iqa/parabank:latest_.
+* `./gradlew assemble` or ``./gradlew build` Create the parabank image _iqa/parabank:latest_.
 * `./gradlew run` Run _iqa/parabank:latest_ in the named container _base_parabank_.
+* `./gradlew check` Start and stop the _base_parabank_ container, creating it first if necessary.
 * `./graldew cleanContainer` deletes _base_parabank_.
 * `./gradlew cleanImage` deletes _iqa/parabank:latest_.
 
