@@ -1,0 +1,1 @@
+docker build -t iqa/parabank:faketime -t registry.gitlab.com/integrationqa/iqa/demos/docker/parabank:faketime .

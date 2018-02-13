@@ -1,0 +1,2 @@
+docker rm mssql_demo_server
+docker run -it --name mssql_demo_server -e ACCEPT_EULA=1 -e MSSQL_SA_PASSWORD=Password1 iqa/mssql:faketime

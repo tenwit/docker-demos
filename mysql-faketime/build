@@ -1,0 +1,1 @@
+docker build -t iqa/mysql:faketime -t registry.gitlab.com/integrationqa/iqa/demos/docker/mysql:faketime .
