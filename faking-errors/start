@@ -1,0 +1,5 @@
+xhost local:+
+docker rm mysql-workbench
+docker run -d -it --name mysql_demo_server -e MYSQL_ALLOW_EMPTY_PASSWORD=1 iqa/mysql:faketime
+docker run --net host -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.mysql-workbench:/root/.mysql/workbench -e DISPLAY=$DISPLAY --name mysql-workbench  jdecool/mysql-workbench
+
