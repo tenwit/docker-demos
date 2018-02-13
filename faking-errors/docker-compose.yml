@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  workbench:
+    image: jdecool/mysql-workbench
+    volumes:
+      - mysql-workbench:/root/.mysql/workbench
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    networks:
+      - fragile
+    environment:
+      - DISPLAY=:0
+
+  mysql:
+    image: iqa/mysql:faketime
+    ports:
+      - "3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - fragile
+
+networks:
+  fragile:
+
+volumes:
+  db-data:
+  mysql-workbench:
