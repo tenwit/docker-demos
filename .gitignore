@@ -1,2 +1,8 @@
 *.war
 .gradle/
+build/
+target/
+.project
+.settings/
+.vscode/
+
