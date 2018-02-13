@@ -1,2 +1,2 @@
 FROM tomcat:alpine
-COPY parabank.war /usr/local/tomcat/webapps
+COPY parabank/target/parabank.war /usr/local/tomcat/webapps

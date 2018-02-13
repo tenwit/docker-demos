@@ -1,0 +1,3 @@
+[submodule "parabank/parabank"]
+	path = parabank/parabank
+	url = https://github.com/parasoft/parabank

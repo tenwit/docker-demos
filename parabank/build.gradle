@@ -1,9 +1,20 @@
+task updateParabank(type: Exec) {
+    commandLine 'git', 'submodule', 'update', '--init', 'parabank'
+}
+
+task buildParabank(type: Exec) {
+    dependsOn 'updateParabank'
+    workingDir 'parabank'
+    commandLine 'mvn', 'install'
+}
+
 task build(type: Exec) {
+    dependsOn 'buildParabank'
     commandLine 'docker', 'build', '-t', 'iqa/parabank:latest', '-t', 'registry.gitlab.com/integrationqa/iqa/demos/docker/parabank:latest', '.'
 }
 
 task assemble { // Alias for "build", to follow the gradle convention.
-    dependsOn build
+    dependsOn 'build'
 }
 
 task run(type: Exec) {
@@ -32,6 +43,11 @@ task cleanImage(type: Exec) {
     commandLine 'docker', 'image', 'rm', '-f', 'iqa/parabank:latest', 'registry.gitlab.com/integrationqa/iqa/demos/docker/parabank:latest'
 }
 
+task clean(type: Exec) {
+     workingDir 'parabank'
+     commandLine 'mvn', 'clean' 
+}
+
 task check {
-    dependsOn 'run', 'stop'
+     dependsOn 'run', 'stop'
 }
