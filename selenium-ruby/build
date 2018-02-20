@@ -1,0 +1,3 @@
+#git clone git@gitlab.com:samuel-garratt/ruby-ui-example.git
+docker build -t iqa/ruby-ui-example -t registry.gitlab.com/integrationqa/iqa/demos/docker/ruby-ui-example .
+#rm -rf ruby-ui-example

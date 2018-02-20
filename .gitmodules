@@ -1,3 +1,6 @@
 [submodule "parabank/parabank"]
 	path = parabank/parabank
 	url = https://github.com/parasoft/parabank
+[submodule "selenium-ruby/ruby-ui-example"]
+	path = selenium-ruby/ruby-ui-example
+	url = https://gitlab.com/samuel-garratt/ruby-ui-example

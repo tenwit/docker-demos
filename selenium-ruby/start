@@ -1,0 +1,1 @@
+docker run --add-host=grid:172.17.0.1 -it iqa/ruby-ui-example
