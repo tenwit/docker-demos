@@ -1,0 +1,2 @@
+docker pull elgalu/selenium
+docker pull dosel/zalenium
