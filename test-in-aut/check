@@ -1,0 +1,6 @@
+docker run -it -v $(pwd)/test/test:/node_modules/seneca/test \
+         -v $(pwd)/run-tests.sh:/node_modules/seneca/run-tests.sh \
+         -v /usr/bin/less:/usr/bin/less
+         --entrypoint sh \
+         iqa/sum \
+         -c "/node_modules/seneca/run-tests.sh /node_modules/seneca"

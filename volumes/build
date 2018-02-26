@@ -1,0 +1,13 @@
+cd blog/_includes
+[ ! -f faking-errors.md ] && cp ../../../faking-errors/README.md faking-errors.md
+[ ! -f mssql-faketime.md ] && cp ../../../mssql-faketime/README.md mssql-faketime.md
+[ ! -f mysql-faketime.md ] && cp ../../../mysql-faketime/README.md mysql-faketime.md
+[ ! -f parabank-faketime.md ] && cp ../../../parabank-faketime/README.md parabank-faketime.md
+[ ! -f parabank.md ] && cp ../../../parabank/README.md parabank.md
+[ ! -f simple-swarm.md ] && cp ../../../simple-swarm/README.md simple-swarm.md
+[ ! -f volumes.md ] && cp ../../../volumes/README.md volumes.md
+[ ! -f zalenium.md ] && cp ../../..//README.md zalenium.md
+cd ../..
+docker run -it -v /home/paulh/docker/demos/volumes/blog:/srv/jekyll jekyll/jekyll jekyll build
+docker build -t iqa/demo_blog .
+

@@ -6,7 +6,7 @@ libfaketime, along with libfaketime configuration that makes it always 30 days i
 
 To see this working, you can run the `./server` script, and note that all the log messages are future-dated.
 You can also run the `./client` script which puts you into the same container in a mssql CLI. Type
-    select sysdatetime
+    select sysdatetime()
     go
 to see what time mssql reports.
 

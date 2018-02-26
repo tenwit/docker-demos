@@ -1,0 +1,22 @@
+version: "3.5"
+services:
+  jenkins:
+    image: jenkins:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - easter_bunny
+      - santa
+    configs:
+      - easter
+      - xmas
+secrets:
+  easter_bunny:
+    file: ./easter_bunny.txt
+  santa:
+    external: true
+configs:
+  easter:
+    external: true
+  xmas:
+    file: ./xmas.txt
