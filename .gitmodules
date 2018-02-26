@@ -4,3 +4,12 @@
 [submodule "selenium-ruby/ruby-ui-example"]
 	path = selenium-ruby/ruby-ui-example
 	url = https://gitlab.com/samuel-garratt/ruby-ui-example
+[submodule "seneca"]
+	path = test-in-aut/test
+	url = git@github.com:senecajs/seneca.git
+[submodule "volumes/site"]
+	path = volumes/site
+	url = git@github.com:maciakl/Sample-Jekyll-Site.git
+[submodule "volumes/blog"]
+	path = volumes/blog
+	url = git@github.com:barryclark/jekyll-now.git
