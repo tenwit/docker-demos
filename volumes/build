@@ -8,6 +8,6 @@ cd blog/_includes
 [ ! -f volumes.md ] && cp ../../../volumes/README.md volumes.md
 [ ! -f zalenium.md ] && cp ../../..//README.md zalenium.md
 cd ../..
-docker run -it -v /home/paulh/docker/demos/volumes/blog:/srv/jekyll jekyll/jekyll jekyll build
+docker run -it --mount type=bind,src=/home/paulh/docker/demos/volumes/blog,target=/srv/jekyll jekyll/jekyll jekyll build
 docker build -t iqa/demo_blog .
 

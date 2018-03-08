@@ -1,3 +1,3 @@
 NAME=
 [ ! -z "$1" ] && NAME="--name=$1 --rm"
-docker run -it -v /home/paulh/docker/demos/volumes/blog:/srv/jekyll -p 80:80 -p 4000:4000 $NAME jekyll/jekyll jekyll serve
+docker run -it --mount type=bind,src=/home/paulh/docker/demos/volumes/blog,target=/srv/jekyll -p 80:80 -p 4000:4000 $NAME jekyll/jekyll jekyll serve

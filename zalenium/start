@@ -1,5 +1,6 @@
+mkdir /tmp/videos 2> /dev/null
 docker run --rm -ti --name zalenium -p 4444:4444 \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     -v /tmp/videos:/home/seluser/videos \
+     --mount type=bind,src=/var/run/docker.sock,target=/var/run/docker.sock \
+     --mount type=bind,src=/tmp/videos,target=/home/seluser/videos \
      --privileged dosel/zalenium start \
      --timeZone Pacific/Auckland
