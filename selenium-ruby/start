@@ -1,1 +1,2 @@
-docker run --add-host=grid:172.17.0.1 -it iqa/ruby-ui-example
+docker container rm ruby-ui-example 2> /dev/null
+docker run --add-host=grid:172.17.0.1 -it --name ruby-ui-example iqa/ruby-ui-example

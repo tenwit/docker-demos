@@ -6,13 +6,13 @@ Bind mounts and non-empty volumes always hide the file/directory in the containe
 In code:
 
     docker volume ls # And "docker volume rm blog" if it's there.
-    docker run --rm -v blog:/srv/jekyll iqa/demo_blog
+    docker run --rm  --mount src=blog,target=/srv/jekyll iqa/demo_blog
     docker volume ls # Hey look, blog is there!
-    docker run --rm -v blog:/dest alpine ls /dest
+    docker run --rm  --mount src=blog,target=/dest alpine ls /dest
 
 Unfortunately, you can't volume mount to the same mount point twice, so backing up does require manual copying (the /dest/src is a little workaround for `cp -R`s habit of copying directories rather than contents of directories):
 
-    docker run --rm -v blog:/src -v blog_backup:/dest/src alpine cp -R /src /dest
+    docker run --rm --mount src=blog,target=/src --mount src=blog_backup,target=/dest/src alpine cp -R /src /dest
 
 Good use cases for all of this is anything to do with replacing input files, hiding files, etc. 
 
