@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  tomcat:
+    build: .
+    image: acme/tomcat:alpine
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../warfiles:/usr/local/tomcat/webapps
