@@ -3,14 +3,14 @@
 ## Step 1: develop the test
 
 ```
-dgoss edit -v /home/paul/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+dgoss edit -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
 goss add file /usr/local/tomcat/lib/catalina.jar
 goss add file /usr/local/tomcat/webapps/sample.war
 ```
 
 Check it by running it as a test:
 ```
-dgoss edit -v /home/paul/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+dgoss run -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
 ```
 Which produces the rather gratifying:
 ```
@@ -29,7 +29,7 @@ File: /usr/local/tomcat/lib/catalina.jar: size: matches expectation: [1683767]
 
 And of course, it should be a _failing_ test at this stage.
 ```
-dgoss run --rm -it -v /home/paul/docker/dgoss/warfiles:/usr/local/tomcat/webapps centos:7
+dgoss run --rm -it -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps centos:7
 ```
 Which produces
 ```
@@ -93,10 +93,12 @@ Edit docker-compose.yml to do that, and build using `docker-compose build`.
 Run the test, including mounting the war file:
 
 ```
-dgoss run --rm -it -v /home/paul/docker/dgoss/warfiles:/usr/local/tomcat/webapps centos:7
+dgoss run --rm -it -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps centos:7
 ```
 
 Mostly good. Doesn't like the file size. No idea what's going on. Never mind, just comment it out.
+
+## Step 3: Refactor
 
 Edit the resulting goss.yaml so that it looks like this:
 ```
@@ -109,3 +111,4 @@ file:
     filetype: file
 ```
 
+Refactoring complete! Iteration 2, please.

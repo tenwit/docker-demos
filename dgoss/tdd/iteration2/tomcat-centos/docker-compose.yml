@@ -3,8 +3,6 @@ version: '3'
 services:
   tomcat:
     build: .
-    sysctls:
-      net.ipv6.conf.all.disable_ipv6: 0
     image: acme/tomcat:centos
     ports:
       - "8080:8080"

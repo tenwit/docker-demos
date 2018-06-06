@@ -18,14 +18,17 @@ Prerequisites:
 ### Step 1: Create our test from our alpine container
 
 ```
-dgoss edit acme/tomcat:alpine
-goss add file /usr/local/tomcat 
+dgoss edit --rm -it -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+goss add file  /usr/local/tomcat/lib/catalina.jar
+goss add file  /usr/local/tomcat/webapps/sample.jar
 ```
 
 ## Iteration 2: Tomcat is running
 
 ### Step 1: Add to our test
 ```
-dgoss edit acme/tomcat:alpine
+dgoss edit --rm -it -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
 goss autoadd java
 ```
+
+That looks good. Try that with centos.
