@@ -20,11 +20,14 @@ Awesome:
 ```
 INFO: Running Tests
 File: /usr/share/tomcat/lib/catalina.jar: exists: matches expectation: [true]
-File: /usr/share/tomcat/lib/catalina.jar: mode: matches expectation: ["0644"]
 File: /usr/share/tomcat/lib/catalina.jar: filetype: matches expectation: ["file"]
-Process: java: running: matches expectation: [true]
 File: /usr/share/tomcat/webapps/sample.war: exists: matches expectation: [true]
 File: /usr/share/tomcat/webapps/sample.war: filetype: matches expectation: ["file"]
+Process: java: running:
+Expected
+    <bool>: false
+to equal
+    <bool>: true
 Port: tcp:8005: listening:
 Expected
     <bool>: false
@@ -46,6 +49,12 @@ Port: tcp6:8080: ip: skipped
 
 
 Failures/Skipped:
+
+Process: java: running:
+Expected
+    <bool>: false
+to equal
+    <bool>: true
 
 Port: tcp:8005: listening:
 Expected
@@ -94,3 +103,4 @@ Re-run the test again.
 
 ## Step 3: Refactor
 
+Make it pretty! Remove all the unnecessary bits.

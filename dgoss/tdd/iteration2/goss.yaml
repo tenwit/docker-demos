@@ -1,7 +1,6 @@
 file:
   /usr/share/tomcat/lib/catalina.jar:
     exists: true
-    mode: "0644"
     filetype: file
     contains: []
   /usr/share/tomcat/webapps/sample.war:
@@ -9,30 +8,8 @@ file:
     filetype: file
     contains: []
 port:
-  tcp:8005:
-    listening: true
-    ip:
-    - 127.0.0.1
-  tcp:8009:
-    listening: true
-    ip:
-    - 0.0.0.0
-  tcp:8080:
-    listening: true
-    ip:
-    - 0.0.0.0
-  tcp6:8005:
-    listening: true
-    ip:
-    - 127.0.0.1
-  tcp6:8009:
-    listening: true
-    ip:
-    - '::'
   tcp6:8080:
     listening: true
-    ip:
-    - '::'
 process:
   java:
     running: true
