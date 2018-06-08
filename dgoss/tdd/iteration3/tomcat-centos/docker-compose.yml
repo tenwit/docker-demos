@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  tomcat:
+    build: .
+    image: acme/tomcat:centos
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 0
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../warfiles:/usr/share/tomcat/webapps

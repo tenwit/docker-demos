@@ -1,15 +1,7 @@
 file:
   /usr/share/tomcat/lib/catalina.jar:
     exists: true
-    mode: "0644"
-#    size: 1683767
-    owner: root
-    group: root
     filetype: file
-    contains: []
   /usr/share/tomcat/webapps/sample.war:
     exists: true
-    mode: "0644"
-    size: 4606
     filetype: file
-    contains: []

@@ -5,12 +5,6 @@ We have as an example the Alpine-based one that we've been using for our integra
 We're an RHEL shop, and we've been allowed use CentOS because it's RedHat.
 So we want to put sample.war on centos:7
 
-Prerequisites:
-* sample.war running on Alpine.
-* goss (dgoss) installed (for the "T" part).
-* VSCode installed (for the 1st "D").
-* Prepared to write failing tests and refactor lots (for the 2nd "D").
-
 # Drive Development through Testing
 
 ## Iteration 1: Tomcat is installed
@@ -18,17 +12,74 @@ Prerequisites:
 ### Step 1: Create our test from our alpine container
 
 ```
-dgoss edit --rm -it -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
-goss add file  /usr/local/tomcat/lib/catalina.jar
-goss add file  /usr/local/tomcat/webapps/sample.jar
+cd ~/tdd/iteration1
+dgoss edit --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+goss add file /usr/local/tomcat/lib/catalina.jar
+goss add file /usr/local/tomcat/webapps/sample.jar
 ```
+
+### Step 2: Make it pass
+
+Fail against vanilla CentOS:
+    dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps centos:7
+
+Build CentOS+Tomcat, and run again:
+```
+cd tomcat-centos
+docker-compose build
+dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
+```
+
+Edit goss.yaml to fix paths. (/usr/local => /usr/share)
+
+### Step 3: Refactor
+
+Remove the unimportant stuff.
 
 ## Iteration 2: Tomcat is running
 
 ### Step 1: Add to our test
+
 ```
-dgoss edit --rm -it -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+cd ~/tdd/iteration2
+dgoss edit --rm -it -p 8080:8080  -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
 goss autoadd java
 ```
 
-That looks good. Try that with centos.
+### Step 2: Make the test pass
+
+    dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps 
+
+Make Tomcat run:
+
+```
+docker-compose build
+dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps 
+```
+
+Wait for Tomcat to start up:
+
+    mv x_goss_wait.yaml goss_wait.yaml
+
+Try again.
+Nope. Turn on IPv6.
+
+    docker run --rm -it -p 8080:8080 -v $WARFILEDIR:/usr/share/tomcat/webapps --sysctl net.ipv6.conf.all.disable_ipv6=0 acme/tomcat:centos
+
+### Step 3: Refactor
+
+Remove the unimportant ports, IP address, etc. Check.
+
+## Iteration 3: Our application is running
+
+### Step 1: Add to our test
+
+`dgoss edit` again. This time, we're going to check that our application is correctly serving its landing page. `goss add http http://localhost:8080` should do it. _Note that goss runs _inside_ the container, so if we were binding the container's port 8080 to the host's port 80, we would use `localhost:8080` as the address. You _can_ use goss on the host as well, if the host is a linux machine.
+
+### Step 2: Make it pass
+
+Actually.. it already passes! Always nice when that happens!
+
+### Step 3: Refactor
+
+Remove the unimportant fields from the HTTP test. And let's add "Hello, World" to make it more precise. Rerun.
