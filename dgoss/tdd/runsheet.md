@@ -6,13 +6,36 @@ Big picture, DevOps seems to be all about testing. It pretty much tells us to
 There, I think I've squeezed all of CALMS in a single sentence! ;)
 Have a policy of designing your checks to be easily consumed by all stakeholders. Easy to read, easy to consume. Share, and enjoy.
 
+## Why TDD for infrastructure code?
+
+Honestly: for exactly the same reasons as for application code.
+
+In my opinion, TDD is primarily a specification technique. It does provide validation, it affects design and it drives development, but its most important affect on how I create software is that is changes the questions I ask myself. Instead of asking "how do I solve this problem?", I ask questions like "what is the smallest problem I can solve" and "what am I _really_ trying to achieve?" There are lots of side effects to this change in perspective:
+- There's fewer tests: one per problem (approximately...).
+- Each test is catching something that no other test will catch.
+- There's less code, and less code to break.
+- Since they're written as specs, thye're self-documenting and phrased in a way that allows them to be used as documentation and (in case of failure) as an error report.
+- They can be more easily pair- or mob-developed by cross-functional teams because they're not reverse-engineered from code, the way may of us write our unit tests.
+- Involving the test- and ops-specialists at this stage fosters the right culture: shared responsibility, shared interest and shared solution creation.
+- Having this broader range of inputs into test developerment helps ensure the right language is developed and consistently used by the team and with the other stakeholders.
+
+It also enables CI of infrastructure from the start. And that leads to all sorts of Devops-y benefits:
+- Increased confidence in the application and infrastructure throughout the organization.
+- Transparent evidence of how close to or far from releasing we might be.
+- With automatic publication of tests as specifications, there is
+  - insurance against loss of team knowledge, and
+  - better preparation for inclusion of new teams (growth, outsourcing, etc.).
+- Improved traceability between requirements and infrastructure (great for auditors!).
+
+## Automated checking of infrastructure code
+
 Application development has bought into automated checking. The applications that enable infrastructure-as-code are so well tested: many of them are open source and you can browse the checks on GitHub. But very often, the code that we write for these applications is not so well tested. There's no real reason for this: the tools are there and they're great! We just don't seem to have the same rigour around infrastructure testing as we do around application testing.
 
 Serverspec, inspec, AWS spec, Kitchen/KitchenCI and more provide everything we need. They're fairly easy to use and provide everything you could possibly want: they have full power of Ruby and its ecosystem of testing libraries behind them. Start using one!
 
-In case that seems like a big ask, today I'm going to lower the bar to getting started. There's another tool, a lot less powerful and a lot less flexible, but it's good at what it does and it's really, really easy to work with.
-
 # Goal for today
+
+In case that seems like a big ask, today I'm going to lower the bar to getting started. There's another tool, a lot less powerful and a lot less flexible, but it's good at what it does and it's really, really easy to work with.
 
 Let's say our development team managed to convince the architects and security guys that docker is the future. They've got neat little image that everyone uses for testing on their dev machines. The continuous integration uses it, the testers use it, we even give the stakeholder demos using it.
 
