@@ -1,3 +1,17 @@
+# Testing in DevOps
+
+Big picture, DevOps seems to be all about testing. It pretty much tells us to
+- use automated checks to measure how fit-for-purpose our applications and infrastructure are, and
+- to share the results widely in order to foster a lean culture.
+There, I think I've squeezed all of CALMS in a single sentence! ;)
+Have a policy of designing your checks to be easily consumed by all stakeholders. Easy to read, easy to consume. Share, and enjoy.
+
+Application development has bought into automated checking. The applications that enable infrastructure-as-code are so well tested: many of them are open source and you can browse the checks on GitHub. But very often, the code that we write for these applications is not well tested. There's no real reason for this: the tools are there and they're great! We just don't seem to have the same rigour around infrastructure testing as we do around application testing.
+
+Serverspec, inspec, AWS spec, Kitchen/KitchenCI and more provide everything we need. They're fairly easy to use and provide everything you could possibly want: they have full power of Ruby and its ecosystem of testing libraries behind them. Start using one!
+
+Today I'm going to lower the bar to getting started. There's another tool, a lot less powerful and a lot less flexible, but it's good at what it does and it's really, really easy to work with.
+
 # Goal for today
 
 Build prod-ready tomcat.
@@ -35,6 +49,10 @@ Edit goss.yaml to fix paths. (/usr/local => /usr/share)
 ### Step 3: Refactor
 
 Remove the unimportant stuff.
+
+### What we've learned
+
+Getting started is easy! The yaml file is easy to read for the technical sorts, and hopefully you can see that it would be easy to convert this to a dashboard explaining what our infrastructure requirements are (two files must exist) and whether or not they are currently satisfied. If you can't see that, just take my word for it: there's tools that'll convert yaml to HTML and the CSS wizes can make it look nice.
 
 ## Iteration 2: Tomcat is running
 
