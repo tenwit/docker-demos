@@ -1,0 +1,1 @@
+dgoss run -p 8080:8080 -v $(pwd)/../warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
