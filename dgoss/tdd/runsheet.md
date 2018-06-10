@@ -3,18 +3,18 @@
 Big picture, DevOps seems to be all about testing. It pretty much tells us to
 - use automated checks to measure how fit-for-purpose our applications and infrastructure are, and
 - to share the results widely in order to foster a lean culture.
-There, I think I've squeezed all of CALMS in a single sentence! ;)
+All of CALMS in a single sentence! ;)
 Have a policy of designing your checks to be easily consumed by all stakeholders. Easy to read, easy to consume. Share, and enjoy.
 
 ## Why TDD for infrastructure code?
 
 Honestly: for exactly the same reasons as for application code.
 
-In my opinion, TDD is primarily a specification technique. It does provide validation, it affects design and it drives development, but its most important affect on how I create software is that is changes the questions I ask myself. Instead of asking "how do I solve this problem?", I ask questions like "what is the smallest problem I can solve" and "what am I _really_ trying to achieve?" There are lots of side effects to this change in perspective:
+In my opinion, TDD is primarily a specification technique. It does provide validation, it affects design and it drives development, but its most important effect on how I create software is that is changes the questions I ask myself. Instead of asking "how do I solve this problem?", I ask questions like "what is the smallest problem I can solve" and "what am I _really_ trying to achieve?" There are lots of side effects to this change in perspective:
 - There's fewer tests: one per problem (approximately...).
 - Each test is catching something that no other test will catch.
 - There's less code, and less code to break.
-- Since they're written as specs, thye're self-documenting and phrased in a way that allows them to be used as documentation and (in case of failure) as an error report.
+- Since they're written as specs, they're self-documenting and phrased in a way that allows them to be used as documentation and (in case of failure) as an error report.
 - They can be more easily pair- or mob-developed by cross-functional teams because they're not reverse-engineered from code, the way may of us write our unit tests.
 - Involving the test- and ops-specialists at this stage fosters the right culture: shared responsibility, shared interest and shared solution creation.
 - Having this broader range of inputs into test developerment helps ensure the right language is developed and consistently used by the team and with the other stakeholders.
