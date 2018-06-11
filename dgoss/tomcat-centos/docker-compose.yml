@@ -9,4 +9,5 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ../warfiles:/usr/share/tomcat/webapps
+      - warfiles:/usr/share/tomcat/webapps
+
