@@ -51,7 +51,7 @@ So we want to get our app running on the centos:7 docker image, in a way that's 
 
 ```
 cd ~/tdd/iteration1
-dgoss edit --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+dgoss edit --rm -it -p 8080:8080 -v warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
 goss add file /usr/local/tomcat/lib/catalina.jar
 goss add file /usr/local/tomcat/webapps/sample.jar
 ```
@@ -59,13 +59,13 @@ goss add file /usr/local/tomcat/webapps/sample.jar
 ### Step 2: Make it pass
 
 Fail against vanilla CentOS:
-    dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps centos:7
+    dgoss run --rm -it -p 8080:8080 -v warfiles:/usr/share/tomcat/webapps centos:7
 
 Build CentOS+Tomcat, and run again:
 ```
 cd tomcat-centos
 docker-compose build
-dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
+dgoss run --rm -it -p 8080:8080 -v warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
 ```
 
 Edit goss.yaml to fix paths. (/usr/local => /usr/share)
@@ -80,19 +80,19 @@ Remove the unimportant stuff.
 
 ```
 cd ~/tdd/iteration2
-dgoss edit --rm -it -p 8080:8080  -v /home/paul/projects/docker/dgoss/warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
+dgoss edit --rm -it -p 8080:8080  -v warfiles:/usr/local/tomcat/webapps acme/tomcat:alpine
 goss autoadd java
 ```
 
 ### Step 2: Make the test pass
 
-    dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps 
+    dgoss run --rm -it -p 8080:8080 -v warfiles:/usr/share/tomcat/webapps 
 
 Make Tomcat run:
 
 ```
 docker-compose build
-dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps 
+dgoss run --rm -it -p 8080:8080 -v warfiles:/usr/share/tomcat/webapps 
 ```
 
 Wait for Tomcat to start up:
@@ -102,7 +102,7 @@ Wait for Tomcat to start up:
 Try again.
 Nope. Turn on IPv6.
 
-    dgoss run --rm -it -p 8080:8080 -v /home/paul/projects/docker/dgoss/warfiles:/usr/share/tomcat/webapps --sysctl net.ipv6.conf.all.disable_ipv6=0 acme/tomcat:centos
+    dgoss run --rm -it -p 8080:8080 -v warfiles:/usr/share/tomcat/webapps --sysctl net.ipv6.conf.all.disable_ipv6=0 acme/tomcat:centos
 
 ### Step 3: Refactor
 
