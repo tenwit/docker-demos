@@ -8,4 +8,7 @@ services:
       - "8080:8080"
     volumes:
       - warfiles:/usr/local/tomcat/webapps
-
+volumes:
+  warfiles:
+    external:
+      name: warfiles

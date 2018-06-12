@@ -11,3 +11,7 @@ services:
     volumes:
       - warfiles:/usr/share/tomcat/webapps
 
+volumes:
+  warfiles:
+    external:
+      name: warfiles
