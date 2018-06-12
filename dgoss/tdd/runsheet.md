@@ -101,3 +101,41 @@ Actually.. it already passes! Always nice when that happens!
 ### Step 3: Refactor
 
 Remove the unimportant fields from the HTTP test. And let's add "Hello, World" to make it more precise. Rerun.
+
+# Copypasta
+
+```
+# intro
+docker run --rm -it -p 8080:8080 --mount type=volume,src=warfiles,target=/usr/local/tomcat/webapps acme/tomcat:alpine
+# iteration1: write failing test
+dgoss edit --rm -it -p 8080:8080 --mount type=volume,src=warfiles,target=/usr/local/tomcat/webapps acme/tomcat:alpine
+goss add file /usr/local/tomcat/lib/catalina.jar
+goss add file /usr/local/tomcat/webapps/sample.war
+dgoss run --rm -it centos:7
+# iteration1: make test pass
+cd ~/dgoss/tdd/iteration1/tomcat-centos
+docker-compose build
+cd ~/demo
+dgoss run --rm -it acme/tomcat:centos
+dgoss run --rm -it -v warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
+# iteration1:  (tidy up)
+# iteration2: write failing test
+dgoss edit --rm -it -p 8080:8080 --mount type=volume,src=warfiles,target=/usr/local/tomcat/webapps acme/tomcat:alpine
+goss autoadd java
+dgoss run --rm -it -v warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
+# iteration2: make test pass
+cd ~/dgoss/tdd/iteration2/tomcat-centos
+docker-compose build
+cd ~/demo
+dgoss run --rm -it -v warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
+cp goss.yaml goss_wailt.yaml # edit it
+dgoss run --rm -it -v warfiles:/usr/share/tomcat/webapps acme/tomcat:centos
+dgoss run --rm -it -v warfiles:/usr/share/tomcat/webapps --sysctl net.ipv6.conf.all.disable_ipv6=0 acme/tomcat:centos
+# iteration2: refactor (tidy up)
+# iteration3: write failing test
+dgoss edit --rm -it -p 8080:8080 --mount type=volume,src=warfiles,target=/usr/local/tomcat/webapps acme/tomcat:alpine
+goss add http http://localhost:8080/
+dgoss run --rm -it -v warfiles:/usr/share/tomcat/webapps --sysctl net.ipv6.conf.all.disable_ipv6=0 acme/tomcat:centos
+# iteration3: make test pass (no-op)
+# iteration3: refactor (tidy up, add Hello, World)
+```
